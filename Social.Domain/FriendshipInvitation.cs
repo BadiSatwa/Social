@@ -9,14 +9,13 @@ namespace Social.Domain
         {
             Apply(new FriendshipInvitationCreated
             {
-                Id = Id,
+                Id = friendshipInvitationId,
                 InvitedId = invited,
                 InvitingId = inviting,
                 InvitationText = invitationText
             });
         }
 
-        public FriendshipInvitationId Id { get; private set; }
         public MemberId Invited { get; private set; }
         public MemberId Inviting { get; private set; }
         public FriendshipInvitationText InvitationText { get; private set; }
