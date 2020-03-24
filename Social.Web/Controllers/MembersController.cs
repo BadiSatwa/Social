@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Social.Application.Features.Members;
@@ -16,8 +18,11 @@ namespace Social.Web.Controllers
             this._mediator = mediator;
         }
 
+        public async Task<IEnumerable<GetMembers.Result>> GetMembers() =>
+            await _mediator.Send(new GetMembers.Command());
+
         [HttpPost]
-        public async Task Get(CreateMember.Command cmd) => await _mediator.Send(cmd);
+        public async Task CreateMember(CreateMember.Command cmd) => await _mediator.Send(cmd);
 
         [HttpPost]
         [Route("friends")]

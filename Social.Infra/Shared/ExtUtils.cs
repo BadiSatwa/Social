@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Text;
+using EventStore.ClientAPI;
 using Newtonsoft.Json;
+using Social.Infra.EventStore;
 
 namespace Social.Infra.Shared
 {
@@ -16,5 +18,12 @@ namespace Social.Infra.Shared
             JsonConvert.DeserializeObject(value, type) as TReturn;
 
         public static TReturn ToObject<TReturn>(this string value) => JsonConvert.DeserializeObject<TReturn>(value);
+
+        public static object ToDomainEvent(this ResolvedEvent @event)
+        {
+            var metadata = @event.Event.Metadata.AsString().ToObject<EventMetadata>();
+            var eventType = Type.GetType(metadata.EventType);
+            return @event.Event.Data.AsString().ToObject<object>(eventType);
+        }
     }
 }

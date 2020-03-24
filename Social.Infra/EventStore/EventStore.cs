@@ -23,12 +23,7 @@ namespace Social.Infra.EventStore
                 slice = await _connection.ReadStreamEventsForwardAsync(id, slice?.LastEventNumber + 1 ?? StreamPosition.Start, 200, false);
 
                 foreach (var @event in slice.Events)
-                {
-                    var metadata = @event.Event.Metadata.AsString().ToObject<EventMetadata>();
-                    var eventType = Type.GetType(metadata.EventType);
-                    var domainEvent = @event.Event.Data.AsString().ToObject<object>(eventType);
-                    yield return domainEvent;
-                }
+                    yield return @event.ToDomainEvent();
 
             } while (!slice.IsEndOfStream);
         }
