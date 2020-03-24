@@ -22,5 +22,9 @@ namespace Social.Web.Controllers
         [HttpPost]
         [Route("friends")]
         public async Task Get(AddFriend.Command cmd) => await _mediator.Send(cmd);
+
+        [HttpPatch]
+        [Route("email")]
+        public async Task Get(UpdateEmail.Command cmd) => await _mediator.Send(cmd);
     }
 }

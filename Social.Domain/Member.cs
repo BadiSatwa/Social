@@ -29,6 +29,13 @@ namespace Social.Domain
                 FriendId = friend.Id
             });
         }
+
+        public void UpdateEmail(EmailAddress emailAddress) =>
+            Apply(new MemberEmailChanged
+            {
+                Id = Id,
+                EmailAddress = emailAddress
+            });
         
         protected override bool EnsureValidState()
         {
@@ -46,6 +53,9 @@ namespace Social.Domain
                     break;
                 case MemberFriendAdded e:
                     _friends.Add(new MemberId(e.FriendId));
+                    break;
+                case MemberEmailChanged e:
+                    EmailAddress = new EmailAddress(e.EmailAddress);
                     break;
             }
         }
