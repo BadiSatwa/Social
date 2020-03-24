@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Social.Domain", "Social.Domain\Social.Domain.csproj", "{125DBE4D-5723-41AD-83F2-42C8AE1B7ABA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Social.Application", "Social.Application\Social.Application.csproj", "{F7A5420E-4337-420E-A560-4210EC0FA7FA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Social.Web", "Social.Web\Social.Web.csproj", "{50F7F3B0-4812-491B-9F3E-49E2AA83041D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Social.Infra", "Social.Infra\Social.Infra.csproj", "{FB7F6C99-AEED-42DA-9653-8E23BCCC7CBC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{25862827-77AD-442F-B530-EFB07FCEC219}"
+	ProjectSection(SolutionItems) = preProject
+		Docker\services.yml = Docker\services.yml
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Social.Domain.Events", "Domain.Events\Social.Domain.Events.csproj", "{CDF82851-2B5D-4BFF-845B-30C99CBF4388}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{125DBE4D-5723-41AD-83F2-42C8AE1B7ABA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{125DBE4D-5723-41AD-83F2-42C8AE1B7ABA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{125DBE4D-5723-41AD-83F2-42C8AE1B7ABA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{125DBE4D-5723-41AD-83F2-42C8AE1B7ABA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7A5420E-4337-420E-A560-4210EC0FA7FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7A5420E-4337-420E-A560-4210EC0FA7FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7A5420E-4337-420E-A560-4210EC0FA7FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7A5420E-4337-420E-A560-4210EC0FA7FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50F7F3B0-4812-491B-9F3E-49E2AA83041D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50F7F3B0-4812-491B-9F3E-49E2AA83041D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50F7F3B0-4812-491B-9F3E-49E2AA83041D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50F7F3B0-4812-491B-9F3E-49E2AA83041D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB7F6C99-AEED-42DA-9653-8E23BCCC7CBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB7F6C99-AEED-42DA-9653-8E23BCCC7CBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB7F6C99-AEED-42DA-9653-8E23BCCC7CBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB7F6C99-AEED-42DA-9653-8E23BCCC7CBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDF82851-2B5D-4BFF-845B-30C99CBF4388}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDF82851-2B5D-4BFF-845B-30C99CBF4388}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDF82851-2B5D-4BFF-845B-30C99CBF4388}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDF82851-2B5D-4BFF-845B-30C99CBF4388}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FD6E4757-EEC0-45AC-830F-EEBB2C1B8E7C}
+	EndGlobalSection
+EndGlobal
