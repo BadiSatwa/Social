@@ -18,6 +18,7 @@ namespace Social.Web.Controllers
             this._mediator = mediator;
         }
 
+        [HttpGet]
         public async Task<IEnumerable<GetMembers.Result>> GetMembers() =>
             await _mediator.Send(new GetMembers.Command());
 

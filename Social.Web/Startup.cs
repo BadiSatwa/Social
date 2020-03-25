@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
 using Serilog;
 using Social.Application;
 using Social.Application.Features.Members;
@@ -32,6 +33,13 @@ namespace Social.Web
         {
             services.AddMediatR(typeof(IAggregateStore).Assembly);
             services.AddControllers();
+
+            // Register the Swagger generator, defining 1 or more Swagger documents
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Social API", Version = "v1" });
+                c.CustomSchemaIds(t => t.FullName);
+            });
 
             services.AddHostedService<HostedProjections>();
 
@@ -67,6 +75,17 @@ namespace Social.Web
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("v1/swagger.json", "Social API V1");
+            });
+
 
             app.UseHttpsRedirection();
 
