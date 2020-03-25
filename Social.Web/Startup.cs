@@ -10,6 +10,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using Social.Application;
+using Social.Application.Features.FriendshipInvitations;
 using Social.Application.Features.Members;
 using Social.Infra;
 using Social.Infra.EventStore;
@@ -34,7 +35,6 @@ namespace Social.Web
             services.AddMediatR(typeof(IAggregateStore).Assembly);
             services.AddControllers();
 
-            // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Social API", Version = "v1" });
@@ -45,7 +45,9 @@ namespace Social.Web
 
             //Projections
             services.AddSingleton<ProjectionsDispatcher>();
-            services.AddScoped<IProjection, GetMemberProjection>();
+            services.AddScoped<IProjection, GetMembersProjection>();
+            services.AddScoped<IProjection, GetFriendsProjection>();
+            services.AddScoped<IProjection, GetSendInvitationsProjection>();
 
             //infrastructure
             services.AddScoped(typeof(IAggregateStore), typeof(EventsAggregateStore));
@@ -63,9 +65,13 @@ namespace Social.Web
 
             //Queries
             services.AddScoped(typeof(IQuery<Empty, IEnumerable<GetMembers.Result>>), typeof(GetMembersQuery));
+            services.AddScoped(typeof(IQuery<Empty, IEnumerable<GetFriends.Result>>), typeof(GetFriendsQuery));
+            services.AddScoped(typeof(IQuery<Empty, IEnumerable<GetSentInvitations.Result>>), typeof(GetSendInvitationsQuery));
 
             //Storing Data
             services.AddSingleton(new List<GetMembers.Result>());
+            services.AddSingleton(new List<GetFriendsProjection.Member>());
+            services.AddSingleton(new List<GetSendInvitationsProjection.InvitationViewModel>());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -76,11 +82,8 @@ namespace Social.Web
                 app.UseDeveloperExceptionPage();
             }
 
-            // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
 
-            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
-            // specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("v1/swagger.json", "Social API V1");

@@ -7,12 +7,12 @@ using Social.Domain.Events;
 
 namespace Social.Infra.Projections
 {
-    public class GetMemberProjection : IProjection
+    public class GetMembersProjection : IProjection
     {
         private readonly List<GetMembers.Result> _list;
-        private readonly ILogger<GetMemberProjection> _log;
+        private readonly ILogger<GetMembersProjection> _log;
 
-        public GetMemberProjection(List<GetMembers.Result> list, ILogger<GetMemberProjection> log)
+        public GetMembersProjection(List<GetMembers.Result> list, ILogger<GetMembersProjection> log)
         {
             _list = list;
             _log = log;

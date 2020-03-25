@@ -33,14 +33,13 @@ namespace Social.Infra
 
         private async Task EventAppeared(EventStoreCatchUpSubscription sub, ResolvedEvent @event)
         {
+            if (@event.Event.EventType.StartsWith("$")) return;
+            
             _logger.LogInformation($"Event Received: {@event.Event.EventType}");
-            if (!@event.Event.EventType.StartsWith("$"))
-            {
-                var domainEvent = @event.ToDomainEvent();
-                using var scope = _serviceProvider.CreateScope();
-                var projections = scope.ServiceProvider.GetServices<IProjection>();
-                await Task.WhenAll(tasks: projections.Select(p => p.Project(domainEvent)).ToArray());
-            }
+            var domainEvent = @event.ToDomainEvent();
+            using var scope = _serviceProvider.CreateScope();
+            var projections = scope.ServiceProvider.GetServices<IProjection>();
+            await Task.WhenAll(tasks: projections.Select(p => p.Project(domainEvent)).ToArray());
         }
 
         public void Stop()
