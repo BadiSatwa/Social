@@ -2,7 +2,7 @@
 
 namespace Social.Domain
 {
-    public class FeedId : Value<Guid>
+    public class FeedId : ValueObject<Guid>
     {
         public FeedId(Guid value) : base(value)
         {

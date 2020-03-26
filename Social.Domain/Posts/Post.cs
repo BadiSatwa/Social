@@ -9,12 +9,7 @@
 
         protected override bool EnsureValidState()
         {
-            throw new System.NotImplementedException();
-        }
-
-        protected override void When(object @event)
-        {
-            throw new System.NotImplementedException();
+            return Id != null;
         }
     }
 }

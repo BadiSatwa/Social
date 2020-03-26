@@ -1,6 +1,6 @@
 ﻿namespace Social.Domain
 {
-    public class EmailAddress : Value<string>
+    public class EmailAddress : ValueObject<string>
     {
         public EmailAddress(string value) : base(value)
         {

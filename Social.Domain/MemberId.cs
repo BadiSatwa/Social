@@ -2,13 +2,13 @@
 
 namespace Social.Domain
 {
-    public class MemberId : Value<Guid>
+    public class MemberId : ValueObject<Guid>
     {
         public MemberId(Guid value) : base(value)
         {
         }
 
-        public override string ToString() => $"member-{_value}";
+        public override string ToString() => $"member-{Value}";
 
     }
 }

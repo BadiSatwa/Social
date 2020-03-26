@@ -2,7 +2,7 @@
 
 namespace Social.Domain
 {
-    public class FriendshipInvitationId : Value<Guid>
+    public class FriendshipInvitationId : ValueObject<Guid>
     {
         public FriendshipInvitationId(Guid value) : base(value)
         {

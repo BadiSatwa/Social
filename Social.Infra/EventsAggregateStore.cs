@@ -25,7 +25,7 @@ namespace Social.Infra
 
         public async Task Save<T, TId>(T aggregate) where T : AggregateRoot<TId>
         {
-            await _eventStore.AppendEvents(aggregate.ToString(), aggregate.GetEvents(), aggregate.Version);
+            await _eventStore.AppendEvents(aggregate.Id.ToString(), aggregate.GetEvents(), aggregate.Version);
         }
     }
 }

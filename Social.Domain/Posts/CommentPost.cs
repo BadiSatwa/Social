@@ -17,5 +17,10 @@
         {
 
         }
+
+        protected override void When(object @event)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

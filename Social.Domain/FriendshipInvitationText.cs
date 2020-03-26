@@ -1,6 +1,6 @@
 ﻿namespace Social.Domain
 {
-    public class FriendshipInvitationText : Value<string>
+    public class FriendshipInvitationText : ValueObject<string>
     {
         public FriendshipInvitationText(string value) : base(value)
         {
