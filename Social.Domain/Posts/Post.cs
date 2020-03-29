@@ -12,11 +12,20 @@ namespace Social.Domain.Posts
             _likes = new List<MemberId>();
         }
 
+        public IEnumerable<MemberId> Liking => _likes;
+
         public void Like(Member who)
         {
             if (_likes.Contains(who.Id))
                 throw new ArgumentException($"Post {Id.Value} was liked before by {who.Id.Value}", nameof(who));
             Apply(new PostLiked{ Id = Id, MemberId = who.Id});
+        }
+
+        public void StopLiking(Member who)
+        {
+            if (!_likes.Contains(who.Id))
+                throw new ArgumentException($"Post {Id.Value} was not liked before by {who.Id.Value}", nameof(who));
+            Apply(new PostUnliked{ Id = Id, MemberId = who.Id});
         }
 
         protected override bool EnsureValidState()
@@ -30,6 +39,9 @@ namespace Social.Domain.Posts
             {
                 case PostLiked e:
                     _likes.Add(new MemberId(e.MemberId));
+                    break;
+                case PostUnliked e:
+                    _likes.Remove(new MemberId(e.MemberId));
                     break;
             }
         }

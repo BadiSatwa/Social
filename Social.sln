@@ -18,6 +18,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{258628
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Social.Domain.Events", "Domain.Events\Social.Domain.Events.csproj", "{CDF82851-2B5D-4BFF-845B-30C99CBF4388}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Social.Domain.Tests", "Social.Domain.Tests\Social.Domain.Tests.csproj", "{801CE3F4-09F2-4184-95DC-39A778368405}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +46,10 @@ Global
 		{CDF82851-2B5D-4BFF-845B-30C99CBF4388}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CDF82851-2B5D-4BFF-845B-30C99CBF4388}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CDF82851-2B5D-4BFF-845B-30C99CBF4388}.Release|Any CPU.Build.0 = Release|Any CPU
+		{801CE3F4-09F2-4184-95DC-39A778368405}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{801CE3F4-09F2-4184-95DC-39A778368405}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{801CE3F4-09F2-4184-95DC-39A778368405}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{801CE3F4-09F2-4184-95DC-39A778368405}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
