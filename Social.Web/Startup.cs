@@ -12,6 +12,7 @@ using Serilog;
 using Social.Application;
 using Social.Application.Features.FriendshipInvitations;
 using Social.Application.Features.Members;
+using Social.Application.Features.Posts;
 using Social.Infra;
 using Social.Infra.EventStore;
 using Social.Infra.Projections;
@@ -48,6 +49,8 @@ namespace Social.Web
             services.AddScoped<IProjection, GetMembersProjection>();
             services.AddScoped<IProjection, GetFriendsProjection>();
             services.AddScoped<IProjection, GetSendInvitationsProjection>();
+            services.AddScoped<IProjection, GetPostsProjection>();
+            services.AddScoped<IProjection, MembersLookupProjection>();
 
             //infrastructure
             services.AddScoped(typeof(IAggregateStore), typeof(EventsAggregateStore));
@@ -67,11 +70,15 @@ namespace Social.Web
             services.AddScoped(typeof(IQuery<Empty, IEnumerable<GetMembers.Result>>), typeof(GetMembersQuery));
             services.AddScoped(typeof(IQuery<Empty, IEnumerable<GetFriends.Result>>), typeof(GetFriendsQuery));
             services.AddScoped(typeof(IQuery<Empty, IEnumerable<GetSentInvitations.Result>>), typeof(GetSendInvitationsQuery));
+            services.AddScoped(typeof(IQuery<Empty, IEnumerable<GetPosts.Result>>), typeof(GetPostsQuery));
 
             //Storing Data
             services.AddSingleton(new List<GetMembers.Result>());
             services.AddSingleton(new List<GetFriendsProjection.Member>());
             services.AddSingleton(new List<GetSendInvitationsProjection.InvitationViewModel>());
+            services.AddSingleton(new List<MemberLookupViewModel>());
+            services.AddSingleton(new List<GetPostsViewModel>());
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

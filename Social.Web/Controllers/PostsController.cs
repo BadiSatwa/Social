@@ -21,8 +21,8 @@ namespace Social.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<GetMembers.Result>> GetMembers() =>
-            await _mediator.Send(new GetMembers.Command());
+        public async Task<IEnumerable<GetPosts.Result>> GetMembers() =>
+            await _mediator.Send(new GetPosts.Command());
 
         [HttpPost]
         [Route("external")]
