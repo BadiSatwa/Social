@@ -28,6 +28,12 @@ namespace Social.Infra.EventStore
             } while (!slice.IsEndOfStream);
         }
 
+        public async Task<T> GetStreamMetadata<T>(string id, string key)
+        {
+            var streamMetadata = await _connection.GetStreamMetadataAsync(id);
+            return streamMetadata.StreamMetadata.GetValue<string>(key).ToObject<T>();
+        }
+
         public async Task AppendEvents(string id, IEnumerable<object> events, long expectedVersion)
         {
             await _connection.AppendToStreamAsync(id, expectedVersion - 1, CreateEvents());
@@ -46,6 +52,14 @@ namespace Social.Infra.EventStore
                     yield return @event;
                 }
             }
+        }
+
+        public async Task StoreStreamMetadata<T>(string id, string key, T data)
+        {
+            var streamMetadata = await _connection.GetStreamMetadataAsync(id);
+            var updatedStream = streamMetadata.StreamMetadata.Copy().SetCustomProperty(key, data.ToJson());
+            await _connection.SetStreamMetadataAsync(id, streamMetadata.MetastreamVersion,
+                updatedStream.Build());
         }
     }
 }

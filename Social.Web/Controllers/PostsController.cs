@@ -27,5 +27,9 @@ namespace Social.Web.Controllers
         [HttpPost]
         [Route("external")]
         public async Task CreateMember(CreateExternalPost.Command cmd) => await _mediator.Send(cmd);
+
+        [HttpPost]
+        [Route("like")]
+        public async Task CreateMember(LikePost.Command cmd) => await _mediator.Send(cmd);
     }
 }

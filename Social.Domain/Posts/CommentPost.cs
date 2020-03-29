@@ -2,7 +2,7 @@
 {
     public class CommentPost : Post
     {
-        public CommentPost(PostId id) : base(id)
+        public CommentPost(PostId id)
         {
         }
 

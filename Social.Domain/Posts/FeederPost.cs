@@ -2,7 +2,7 @@
 {
     public class FeederPost : Post
     {
-        public FeederPost(PostId id) : base(id)
+        public FeederPost(PostId id)
         {
         }
 

@@ -5,7 +5,7 @@ namespace Social.Domain.Posts
 {
     public class ExternalSystemPost : Post
     {
-        public ExternalSystemPost(PostId id, ExternalSystemPostId externalSystemPostId) : base(id)
+        public ExternalSystemPost(PostId id, ExternalSystemPostId externalSystemPostId)
         {
             Apply(new ExternalSystemPostCreated
             {
@@ -15,10 +15,14 @@ namespace Social.Domain.Posts
             });
         }
 
+        internal ExternalSystemPost()
+        {}
+
         public ExternalSystemPostId ExternalSystemPostId { get; private set; }
 
         protected override void When(object @event)
         {
+            base.When(@event);
             switch (@event)
             {
                 case ExternalSystemPostCreated e:

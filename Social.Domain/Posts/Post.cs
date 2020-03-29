@@ -1,15 +1,37 @@
-﻿namespace Social.Domain.Posts
+﻿using System;
+using System.Collections.Generic;
+using Social.Domain.Events;
+
+namespace Social.Domain.Posts
 {
     public abstract class Post : AggregateRoot<PostId>
     {
-        protected Post(PostId id)
+        private readonly List<MemberId> _likes;
+        protected Post()
         {
-            Id = id;
+            _likes = new List<MemberId>();
+        }
+
+        public void Like(Member who)
+        {
+            if (_likes.Contains(who.Id))
+                throw new ArgumentException($"Post {Id.Value} was liked before by {who.Id.Value}", nameof(who));
+            Apply(new PostLiked{ Id = Id, MemberId = who.Id});
         }
 
         protected override bool EnsureValidState()
         {
             return Id != null;
+        }
+
+        protected override void When(object @event)
+        {
+            switch (@event)
+            {
+                case PostLiked e:
+                    _likes.Add(new MemberId(e.MemberId));
+                    break;
+            }
         }
     }
 }
