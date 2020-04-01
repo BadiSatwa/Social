@@ -1,6 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
+using EventStore.ClientAPI;
+using EventStore.ClientAPI.Common.Log;
+using EventStore.ClientAPI.Projections;
+using EventStore.ClientAPI.SystemData;
+using Microsoft.Extensions.Logging;
 using Social.Application;
 using Social.Application.Features.Posts;
 using Social.Infra.Projections;
@@ -9,22 +16,16 @@ namespace Social.Infra.Queries
 {
     public class GetPostsQuery : IQuery<Empty, IEnumerable<GetPosts.Result>>
     {
-        private readonly List<GetPostsViewModel> _viewModel;
+        private readonly IProjectionsManager _projectionsManager;
 
-        public GetPostsQuery(List<GetPostsViewModel> viewModel)
+        public GetPostsQuery(IProjectionsManager projectionsManager)
         {
-            _viewModel = viewModel;
+            _projectionsManager = projectionsManager;
         }
-
+            
         public Task<IEnumerable<GetPosts.Result>> Execute(Empty arg)
         {
-            return Task.FromResult(_viewModel.Select(vm => 
-                new GetPosts.Result
-                {
-                    Id = vm.Id,
-                    LikeCount = vm.Who.Count(),
-                    WhoLiked = vm.Who.Select(m => m.EmailAddress)
-                }));
+            return _projectionsManager.GetResults<IEnumerable<GetPosts.Result>>("likes");
         }
     }
 }

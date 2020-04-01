@@ -45,7 +45,6 @@ namespace Social.Domain.Tests
 
         public void UnlikePost_PostWasNotLikedBefore_ThrowException()
         {
-
         }
     }
 }

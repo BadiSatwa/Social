@@ -42,15 +42,11 @@ namespace Social.Web
                 c.CustomSchemaIds(t => t.FullName);
             });
 
-            services.AddHostedService<HostedProjections>();
+            services.AddHostedService<StartupActions>();
 
             //Projections
-            services.AddSingleton<ProjectionsDispatcher>();
-            services.AddScoped<IProjection, GetMembersProjection>();
-            services.AddScoped<IProjection, GetFriendsProjection>();
-            services.AddScoped<IProjection, GetSendInvitationsProjection>();
-            services.AddScoped<IProjection, GetPostsProjection>();
-            services.AddScoped<IProjection, MembersLookupProjection>();
+            services.AddSingleton<IProjectionsManager, EventStoreProjectionsManager>();
+            services.AddSingleton<IProjectionDefinitionsProvider, EmbeddedProjectionDefinitionsProvider>();
 
             //infrastructure
             services.AddScoped(typeof(IAggregateStore), typeof(EventsAggregateStore));
@@ -62,7 +58,6 @@ namespace Social.Web
                 var options = s.GetRequiredService<IOptions<EventStoreOptions>>().Value;
                 var connection = EventStoreConnection
                     .Create($"ConnectTo=tcp://{options.UserName}:{options.Password}@{options.Address}:{options.Port};");
-                connection.ConnectAsync().Wait();
                 return connection;
             });
 
@@ -71,13 +66,6 @@ namespace Social.Web
             services.AddScoped(typeof(IQuery<Empty, IEnumerable<GetFriends.Result>>), typeof(GetFriendsQuery));
             services.AddScoped(typeof(IQuery<Empty, IEnumerable<GetSentInvitations.Result>>), typeof(GetSendInvitationsQuery));
             services.AddScoped(typeof(IQuery<Empty, IEnumerable<GetPosts.Result>>), typeof(GetPostsQuery));
-
-            //Storing Data
-            services.AddSingleton(new List<GetMembers.Result>());
-            services.AddSingleton(new List<GetFriendsProjection.Member>());
-            services.AddSingleton(new List<GetSendInvitationsProjection.InvitationViewModel>());
-            services.AddSingleton(new List<MemberLookupViewModel>());
-            services.AddSingleton(new List<GetPostsViewModel>());
 
         }
 

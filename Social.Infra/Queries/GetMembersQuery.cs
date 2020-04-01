@@ -1,24 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Social.Application;
 using Social.Application.Features.Members;
+using Social.Infra.Projections;
 
 namespace Social.Infra.Queries
 {
     public class GetMembersQuery : IQuery<Empty, IEnumerable<GetMembers.Result>>
     {
-        private readonly List<GetMembers.Result> _list;
+        private readonly IProjectionsManager _projectionsManager;
 
-        public GetMembersQuery(List<GetMembers.Result> list)
+        public GetMembersQuery(IProjectionsManager projectionsManager)
         {
-            _list = list;
+            _projectionsManager = projectionsManager;
         }
 
         public Task<IEnumerable<GetMembers.Result>> Execute(Empty arg)
         {
-            return Task.FromResult(_list.AsEnumerable());
+            return _projectionsManager.GetResults<IEnumerable<GetMembers.Result>>("members");
         }
     }
 }

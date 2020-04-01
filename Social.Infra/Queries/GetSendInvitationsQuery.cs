@@ -9,21 +9,9 @@ namespace Social.Infra.Queries
 {
     public class GetSendInvitationsQuery : IQuery<Empty, IEnumerable<GetSentInvitations.Result>>
     {
-        private readonly List<GetSendInvitationsProjection.InvitationViewModel> _list;
-
-        public GetSendInvitationsQuery(List<GetSendInvitationsProjection.InvitationViewModel> list)
-        {
-            _list = list;
-        }
-
         public Task<IEnumerable<GetSentInvitations.Result>> Execute(Empty arg)
         {
-            return Task.FromResult(_list.Select(i => new GetSentInvitations.Result
-            {
-                Id = i.Id,
-                EmailAddress = i.InvitedEmailAddress,
-                State = i.State
-            }));
+            return Task.FromResult(Enumerable.Empty<GetSentInvitations.Result>());
         }
     }
 }
