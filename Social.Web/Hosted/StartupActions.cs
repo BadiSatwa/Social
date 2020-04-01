@@ -39,8 +39,6 @@ namespace Social.Web.Hosted
         {
             _logger.LogInformation("StartupActions Shutting Down");
 
-            _eventStoreConnection.Dispose();
-
             return Task.CompletedTask;
         }
     }

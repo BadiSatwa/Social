@@ -25,7 +25,7 @@ namespace Social.Infra.Projections
             _logger = logger;
             _projectionDefinitions = projectionDefinitions;
             _projectionsManager = new ProjectionsManager(new ConsoleLogger(),
-                new IPEndPoint(IPAddress.Parse(eventStoreOptions.Value.Address), eventStoreOptions.Value.ProjectionsPort),
+                new IPEndPoint(IPAddress.Parse(eventStoreOptions.Value.ProjectionsAddress), eventStoreOptions.Value.ProjectionsPort),
                 TimeSpan.FromMinutes(1));
             _userCredentials = new UserCredentials(eventStoreOptions.Value.UserName, eventStoreOptions.Value.Password);
         }

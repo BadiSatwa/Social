@@ -27,4 +27,8 @@
     <EmbeddedResource Include="EventStore/ProjectionDefinitions/*.js" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="EventStore\ProjectionDefinitions\members.js" />
+  </ItemGroup>
+
 </Project>
